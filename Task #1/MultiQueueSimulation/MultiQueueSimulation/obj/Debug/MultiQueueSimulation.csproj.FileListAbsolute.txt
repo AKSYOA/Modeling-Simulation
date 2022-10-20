@@ -90,10 +90,10 @@ D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQu
 D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\bin\Debug\MultiQueueModels.dll
 D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\bin\Debug\MultiQueueModels.pdb
 D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csprojAssemblyReference.cache
-D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Form1.resources
 D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Properties.Resources.resources
 D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csproj.GenerateResource.cache
 D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csproj.CoreCompileInputs.cache
 D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csproj.CopyComplete
 D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.exe
 D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.pdb
+D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Main.resources
