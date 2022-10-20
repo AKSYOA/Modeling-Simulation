@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MultiQueueTesting;
 using MultiQueueModels;
-
+//sb7 ya 3m goda
 namespace MultiQueueSimulation
 {
     static class Program
