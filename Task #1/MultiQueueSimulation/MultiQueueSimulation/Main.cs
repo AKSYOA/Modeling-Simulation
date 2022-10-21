@@ -40,6 +40,7 @@ namespace MultiQueueSimulation
             stoppingNumberTextBox.Text = system.StoppingNumber.ToString();
             stoppingCriteriaTextBox.Text = system.StoppingCriteria.ToString();
             selectionMethodTextBox.Text = system.SelectionMethod.ToString();
+            interarrivalDistributionDataTable.Rows.Clear();
             for (int i = 0; i < system.InterarrivalDistribution.Count; i++)
             {
                 int interarrivalTime = system.InterarrivalDistribution[i].Time;
