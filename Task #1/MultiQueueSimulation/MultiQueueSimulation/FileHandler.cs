@@ -56,6 +56,24 @@ namespace MultiQueueSimulation
                         decimal probability = Decimal.Parse(values[1]);
                         system.InterarrivalDistribution.Add(new TimeDistribution(time, probability));
                     }
+                }else if (ln.Equals("ServiceDistribution_Server1"))
+                {
+                    for (int i =1; i <= system.NumberOfServers; i++)
+                    {
+                        Server server = new Server();
+                        server.ID = i;
+                        while (!String.IsNullOrEmpty(ln = sr.ReadLine()))
+                        {
+                            ln = ln.Replace(" ", string.Empty);
+                            string[] values = ln.Split(',');
+                            int time = Int32.Parse(values[0]);
+                            decimal probability = Decimal.Parse(values[1]);
+                            server.TimeDistribution.Add(new TimeDistribution(time, probability));
+                        }
+                        ln = sr.ReadLine();
+                        system.Servers.Add(server);
+                    }
+
                 }
 
                 /*

@@ -38,10 +38,10 @@ namespace MultiQueueSimulation
            
             if (fileResult == DialogResult.OK)
             {
-                    fileName = testCaseFileDialog.SafeFileName;
-                    FileHandler.ReadTestCase(testCaseFileDialog.FileName);
+                fileName = testCaseFileDialog.SafeFileName;
+                FileHandler.ReadTestCase(testCaseFileDialog.FileName);
 
-                 /* testing purposes
+                    /*
                     Console.WriteLine(fileName);
                     Console.WriteLine(FileHandler.system.NumberOfServers);
                     Console.WriteLine(FileHandler.system.StoppingNumber);
@@ -49,10 +49,17 @@ namespace MultiQueueSimulation
                     Console.WriteLine(FileHandler.system.StoppingCriteria);
                     for (int i =0; i < FileHandler.system.InterarrivalDistribution.Count; i++)
                     {
-                        Console.WriteLine(FileHandler.system.InterarrivalDistribution[i].Time + FileHandler.system.InterarrivalDistribution[i].Probability);
+                        Console.WriteLine(FileHandler.system.InterarrivalDistribution[i].Time + " " + FileHandler.system.InterarrivalDistribution[i].Probability);
                     }
-                */
-
+                    for (int i =0; i< FileHandler.system.Servers.Count; i++)
+                    {
+                        Console.WriteLine(FileHandler.system.Servers[i].ID);
+                        for (int j =0; j < FileHandler.system.Servers[i].TimeDistribution.Count; j++)
+                        {
+                        Console.WriteLine(FileHandler.system.Servers[i].TimeDistribution[j].Time + " " + FileHandler.system.Servers[i].TimeDistribution[j].Probability);
+                        }
+                    }
+                    */
             }
         }
 
