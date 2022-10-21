@@ -31,7 +31,22 @@ namespace MultiQueueSimulation
             return fileName;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void displayData()
+        {
+            numberOfServersTextBox.Text = FileHandler.system.NumberOfServers.ToString();
+            stoppingNumberTextBox.Text = FileHandler.system.StoppingNumber.ToString();
+            stoppingCriteriaTextBox.Text = FileHandler.system.StoppingCriteria.ToString();
+            selectionMethodTextBox.Text = FileHandler.system.SelectionMethod.ToString();
+            for (int i = 0; i < FileHandler.system.InterarrivalDistribution.Count; i++)
+            {
+                int interarrivalTime = FileHandler.system.InterarrivalDistribution[i].Time;
+                decimal Probability = FileHandler.system.InterarrivalDistribution[i].Probability;
+                interarrivalDistributionDataTable.Rows.Add(interarrivalTime, Probability);
+            }
+           
+        }
+
+        private void openTestCaseButton_Click(object sender, EventArgs e)
         {
             testCaseFileDialog = new OpenFileDialog();
             DialogResult fileResult = testCaseFileDialog.ShowDialog();
@@ -40,26 +55,31 @@ namespace MultiQueueSimulation
             {
                 fileName = testCaseFileDialog.SafeFileName;
                 FileHandler.ReadTestCase(testCaseFileDialog.FileName);
+                displayData();
 
-                    /*
-                    Console.WriteLine(fileName);
-                    Console.WriteLine(FileHandler.system.NumberOfServers);
-                    Console.WriteLine(FileHandler.system.StoppingNumber);
-                    Console.WriteLine(FileHandler.system.SelectionMethod);
-                    Console.WriteLine(FileHandler.system.StoppingCriteria);
-                    for (int i =0; i < FileHandler.system.InterarrivalDistribution.Count; i++)
+                #region // comments
+                /*
+                Console.WriteLine(fileName);
+                Console.WriteLine(FileHandler.system.NumberOfServers);
+                Console.WriteLine(FileHandler.system.StoppingNumber);
+                Console.WriteLine(FileHandler.system.SelectionMethod);
+                Console.WriteLine(FileHandler.system.StoppingCriteria);
+                for (int i =0; i < FileHandler.system.InterarrivalDistribution.Count; i++)
+                {
+                    Console.WriteLine(FileHandler.system.InterarrivalDistribution[i].Time + " " + FileHandler.system.InterarrivalDistribution[i].Probability);
+                }
+                for (int i =0; i< FileHandler.system.Servers.Count; i++)
+                {
+                    Console.WriteLine(FileHandler.system.Servers[i].ID);
+                    for (int j =0; j < FileHandler.system.Servers[i].TimeDistribution.Count; j++)
                     {
-                        Console.WriteLine(FileHandler.system.InterarrivalDistribution[i].Time + " " + FileHandler.system.InterarrivalDistribution[i].Probability);
+                    Console.WriteLine(FileHandler.system.Servers[i].TimeDistribution[j].Time + " " + FileHandler.system.Servers[i].TimeDistribution[j].Probability);
                     }
-                    for (int i =0; i< FileHandler.system.Servers.Count; i++)
-                    {
-                        Console.WriteLine(FileHandler.system.Servers[i].ID);
-                        for (int j =0; j < FileHandler.system.Servers[i].TimeDistribution.Count; j++)
-                        {
-                        Console.WriteLine(FileHandler.system.Servers[i].TimeDistribution[j].Time + " " + FileHandler.system.Servers[i].TimeDistribution[j].Probability);
-                        }
-                    }
-                    */
+                }
+                */
+                #endregion
+
+
             }
         }
 
