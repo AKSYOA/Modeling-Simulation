@@ -10,10 +10,11 @@ namespace MultiQueueSimulation
 {
     class FileHandler
     {
-        public static  SimulationSystem system = new SimulationSystem();
+        private SimulationSystem system;
 
-        public static void ReadTestCase(string testCasePath)
+        public SimulationSystem ReadTestCase(string testCasePath)
         {
+            system = new SimulationSystem();
             Stream stream = File.Open(testCasePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             var sr = new StreamReader(stream);
             string ln;
@@ -76,18 +77,8 @@ namespace MultiQueueSimulation
 
                 }
 
-                /*
-                if (String.IsNullOrEmpty(ln))
-                {
-                    Console.WriteLine("Empty");
-                }else
-                {
-                    Console.WriteLine(ln);
-
-                }
-                */
-
             }
+            return system;
         }
 
     }

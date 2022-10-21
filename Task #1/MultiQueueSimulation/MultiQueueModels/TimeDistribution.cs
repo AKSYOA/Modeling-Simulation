@@ -8,6 +8,10 @@ namespace MultiQueueModels
 {
     public class TimeDistribution
     {
+        public TimeDistribution()
+        {
+
+        }
         public TimeDistribution(int Time, decimal Probability)
         {
             this.Time = Time;

@@ -20,9 +20,9 @@ namespace MultiQueueSimulation
             Application.SetCompatibleTextRenderingDefault(false);
             Main form = new Main();
             Application.Run(form);
-            SimulationSystem system = new SimulationSystem();
-            string result = TestingManager.Test(system, form.getFileName());
-            MessageBox.Show(result);
+            //SimulationSystem system = new SimulationSystem();
+            //string result = TestingManager.Test(system, form.getFileName());
+            //MessageBox.Show(result);
         }
     }
 }
