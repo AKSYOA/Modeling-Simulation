@@ -23,5 +23,24 @@ namespace MultiQueueModels
         //optional if needed use them
         public int FinishTime { get; set; }
         public int TotalWorkingTime { get; set; }
+
+        public void calculateCummProbability()
+        {
+            for (int i = 0; i < TimeDistribution.Count; i++)
+            {
+
+                if (i == 0)
+                {
+                    TimeDistribution[i].CummProbability = TimeDistribution[i].Probability;
+                    TimeDistribution[i].MinRange = 1;
+                }
+                else
+                {
+                    TimeDistribution[i].CummProbability = TimeDistribution[i - 1].CummProbability + TimeDistribution[i].Probability;
+                    TimeDistribution[i].MinRange = TimeDistribution[i - 1].MaxRange + 1;
+                }
+                TimeDistribution[i].MaxRange = Decimal.ToInt32(TimeDistribution[i].CummProbability * 100);
+            }
+        }
     }
 }

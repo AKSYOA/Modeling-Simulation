@@ -29,7 +29,7 @@ namespace MultiQueueModels
         public PerformanceMeasures PerformanceMeasures { get; set; }
         
          //calculating cumulative probability for Interarrival distribution & setting min and max range
-        public void calcCummProp()
+        public void calculateCummProbability()
         {
             for (int i = 0; i < InterarrivalDistribution.Count; i++) {
 
@@ -37,14 +37,38 @@ namespace MultiQueueModels
                 {
                     InterarrivalDistribution[i].CummProbability = InterarrivalDistribution[i].Probability;
                     InterarrivalDistribution[i].MinRange = 1;
-                    InterarrivalDistribution[i].MaxRange = Decimal.ToInt32(InterarrivalDistribution[i].CummProbability * 100); 
                 }
                 else {
                     InterarrivalDistribution[i].CummProbability = InterarrivalDistribution[i-1].CummProbability + InterarrivalDistribution[i].Probability;
                     InterarrivalDistribution[i].MinRange = InterarrivalDistribution[i - 1].MaxRange + 1;
-                    InterarrivalDistribution[i].MaxRange = Decimal.ToInt32(InterarrivalDistribution[i].CummProbability * 100);
                 }
+                InterarrivalDistribution[i].MaxRange = Decimal.ToInt32(InterarrivalDistribution[i].CummProbability * 100);
+            }
 
+            foreach(var server in Servers)
+            {
+                server.calculateCummProbability();
+            }
+        }
+
+        //testing
+        public void displayTables()
+        {
+            Console.WriteLine("Interarrival Distribution");
+            Console.WriteLine("Time Probability CummProbability minRange MaxRange");
+            foreach(var inter in InterarrivalDistribution)
+            {
+                Console.WriteLine(inter.Time + " " + inter.Probability + " " + inter.CummProbability + " " + inter.MinRange + " "+ inter.MaxRange );
+            }
+            Console.WriteLine();
+            foreach(var server in Servers)
+            {
+                Console.WriteLine("server");
+                foreach(var inter in server.TimeDistribution)
+                {
+                    Console.WriteLine(inter.Time + " " + inter.Probability + " " + inter.CummProbability + " " + inter.MinRange + " " + inter.MaxRange);
+
+                }
             }
         }
 
