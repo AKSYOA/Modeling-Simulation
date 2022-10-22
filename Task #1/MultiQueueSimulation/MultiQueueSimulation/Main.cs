@@ -40,6 +40,11 @@ namespace MultiQueueSimulation
             stoppingNumberTextBox.Text = system.StoppingNumber.ToString();
             stoppingCriteriaTextBox.Text = system.StoppingCriteria.ToString();
             selectionMethodTextBox.Text = system.SelectionMethod.ToString();
+            //output
+            AverageWaitingTime.Text = system.PerformanceMeasures.AverageWaitingTime.ToString();
+            MaxQueueLength.Text = system.PerformanceMeasures.MaxQueueLength.ToString();
+            WaitingProbability.Text = system.PerformanceMeasures.WaitingProbability.ToString();
+
             for (int i = 0; i < system.InterarrivalDistribution.Count; i++)
             {
                 int interarrivalTime = system.InterarrivalDistribution[i].Time;

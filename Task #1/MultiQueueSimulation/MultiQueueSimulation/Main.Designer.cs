@@ -42,13 +42,19 @@
             this.interarrivalTimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.probabilityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.serviceTimeDistributionDataTable = new System.Windows.Forms.DataGridView();
+            this.serviceTimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.serverProbabilityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.serversLabel = new System.Windows.Forms.Label();
             this.interarrivalDistributionLabel = new System.Windows.Forms.Label();
             this.serverServiceTimeDistributionLabel = new System.Windows.Forms.Label();
             this.serverComboBox = new System.Windows.Forms.ComboBox();
             this.simulateButton = new System.Windows.Forms.Button();
-            this.serviceTimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.serverProbabilityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AverageWaitingTime = new System.Windows.Forms.TextBox();
+            this.AverageWaitingTimeLabel = new System.Windows.Forms.Label();
+            this.MaxQueueLength = new System.Windows.Forms.TextBox();
+            this.MaxQueueTextLabel = new System.Windows.Forms.Label();
+            this.WaitingProbability = new System.Windows.Forms.TextBox();
+            this.WaitingProbabilityLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.interarrivalDistributionDataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.serviceTimeDistributionDataTable)).BeginInit();
             this.SuspendLayout();
@@ -68,7 +74,7 @@
             this.numberOfServersLabel.AutoSize = true;
             this.numberOfServersLabel.Location = new System.Drawing.Point(169, 297);
             this.numberOfServersLabel.Name = "numberOfServersLabel";
-            this.numberOfServersLabel.Size = new System.Drawing.Size(99, 13);
+            this.numberOfServersLabel.Size = new System.Drawing.Size(97, 13);
             this.numberOfServersLabel.TabIndex = 1;
             this.numberOfServersLabel.Text = "Number Of Servers";
             // 
@@ -86,7 +92,7 @@
             this.stoppingCriteriaLabel.AutoSize = true;
             this.stoppingCriteriaLabel.Location = new System.Drawing.Point(465, 297);
             this.stoppingCriteriaLabel.Name = "stoppingCriteriaLabel";
-            this.stoppingCriteriaLabel.Size = new System.Drawing.Size(87, 13);
+            this.stoppingCriteriaLabel.Size = new System.Drawing.Size(84, 13);
             this.stoppingCriteriaLabel.TabIndex = 3;
             this.stoppingCriteriaLabel.Text = "Stopping Criteria";
             // 
@@ -95,7 +101,7 @@
             this.selectionMethodLabel.AutoSize = true;
             this.selectionMethodLabel.Location = new System.Drawing.Point(600, 297);
             this.selectionMethodLabel.Name = "selectionMethodLabel";
-            this.selectionMethodLabel.Size = new System.Drawing.Size(89, 13);
+            this.selectionMethodLabel.Size = new System.Drawing.Size(90, 13);
             this.selectionMethodLabel.TabIndex = 4;
             this.selectionMethodLabel.Text = "Selection Method";
             // 
@@ -171,12 +177,24 @@
             this.serviceTimeDistributionDataTable.Size = new System.Drawing.Size(243, 252);
             this.serviceTimeDistributionDataTable.TabIndex = 10;
             // 
+            // serviceTimeColumn
+            // 
+            this.serviceTimeColumn.HeaderText = "Service Time";
+            this.serviceTimeColumn.Name = "serviceTimeColumn";
+            this.serviceTimeColumn.ReadOnly = true;
+            // 
+            // serverProbabilityColumn
+            // 
+            this.serverProbabilityColumn.HeaderText = "Probability";
+            this.serverProbabilityColumn.Name = "serverProbabilityColumn";
+            this.serverProbabilityColumn.ReadOnly = true;
+            // 
             // serversLabel
             // 
             this.serversLabel.AutoSize = true;
             this.serversLabel.Location = new System.Drawing.Point(347, 30);
             this.serversLabel.Name = "serversLabel";
-            this.serversLabel.Size = new System.Drawing.Size(39, 13);
+            this.serversLabel.Size = new System.Drawing.Size(38, 13);
             this.serversLabel.TabIndex = 11;
             this.serversLabel.Text = "Server";
             // 
@@ -185,7 +203,7 @@
             this.interarrivalDistributionLabel.AutoSize = true;
             this.interarrivalDistributionLabel.Location = new System.Drawing.Point(121, 9);
             this.interarrivalDistributionLabel.Name = "interarrivalDistributionLabel";
-            this.interarrivalDistributionLabel.Size = new System.Drawing.Size(118, 13);
+            this.interarrivalDistributionLabel.Size = new System.Drawing.Size(111, 13);
             this.interarrivalDistributionLabel.TabIndex = 12;
             this.interarrivalDistributionLabel.Text = "Interarrival Distribution";
             // 
@@ -194,7 +212,7 @@
             this.serverServiceTimeDistributionLabel.AutoSize = true;
             this.serverServiceTimeDistributionLabel.Location = new System.Drawing.Point(511, 9);
             this.serverServiceTimeDistributionLabel.Name = "serverServiceTimeDistributionLabel";
-            this.serverServiceTimeDistributionLabel.Size = new System.Drawing.Size(159, 13);
+            this.serverServiceTimeDistributionLabel.Size = new System.Drawing.Size(158, 13);
             this.serverServiceTimeDistributionLabel.TabIndex = 13;
             this.serverServiceTimeDistributionLabel.Text = "Server Service Time Distribution";
             // 
@@ -216,23 +234,65 @@
             this.simulateButton.Text = "Simulate";
             this.simulateButton.UseVisualStyleBackColor = true;
             // 
-            // serviceTimeColumn
+            // AverageWaitingTime
             // 
-            this.serviceTimeColumn.HeaderText = "Service Time";
-            this.serviceTimeColumn.Name = "serviceTimeColumn";
-            this.serviceTimeColumn.ReadOnly = true;
+            this.AverageWaitingTime.Location = new System.Drawing.Point(166, 385);
+            this.AverageWaitingTime.Name = "AverageWaitingTime";
+            this.AverageWaitingTime.Size = new System.Drawing.Size(100, 20);
+            this.AverageWaitingTime.TabIndex = 16;
             // 
-            // serverProbabilityColumn
+            // AverageWaitingTimeLabel
             // 
-            this.serverProbabilityColumn.HeaderText = "Probability";
-            this.serverProbabilityColumn.Name = "serverProbabilityColumn";
-            this.serverProbabilityColumn.ReadOnly = true;
+            this.AverageWaitingTimeLabel.AutoSize = true;
+            this.AverageWaitingTimeLabel.Location = new System.Drawing.Point(163, 369);
+            this.AverageWaitingTimeLabel.Name = "AverageWaitingTimeLabel";
+            this.AverageWaitingTimeLabel.Size = new System.Drawing.Size(112, 13);
+            this.AverageWaitingTimeLabel.TabIndex = 17;
+            this.AverageWaitingTimeLabel.Text = "Average Waiting Time";
+            // 
+            // MaxQueueLength
+            // 
+            this.MaxQueueLength.Location = new System.Drawing.Point(328, 385);
+            this.MaxQueueLength.Name = "MaxQueueLength";
+            this.MaxQueueLength.Size = new System.Drawing.Size(100, 20);
+            this.MaxQueueLength.TabIndex = 18;
+            // 
+            // MaxQueueTextLabel
+            // 
+            this.MaxQueueTextLabel.AutoSize = true;
+            this.MaxQueueTextLabel.Location = new System.Drawing.Point(330, 369);
+            this.MaxQueueTextLabel.Name = "MaxQueueTextLabel";
+            this.MaxQueueTextLabel.Size = new System.Drawing.Size(98, 13);
+            this.MaxQueueTextLabel.TabIndex = 19;
+            this.MaxQueueTextLabel.Text = "Max Queue Length";
+            // 
+            // WaitingProbability
+            // 
+            this.WaitingProbability.Location = new System.Drawing.Point(481, 384);
+            this.WaitingProbability.Name = "WaitingProbability";
+            this.WaitingProbability.Size = new System.Drawing.Size(100, 20);
+            this.WaitingProbability.TabIndex = 20;
+            // 
+            // WaitingProbabilityLabel
+            // 
+            this.WaitingProbabilityLabel.AutoSize = true;
+            this.WaitingProbabilityLabel.Location = new System.Drawing.Point(478, 368);
+            this.WaitingProbabilityLabel.Name = "WaitingProbabilityLabel";
+            this.WaitingProbabilityLabel.Size = new System.Drawing.Size(94, 13);
+            this.WaitingProbabilityLabel.TabIndex = 21;
+            this.WaitingProbabilityLabel.Text = "Waiting Probability";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(733, 352);
+            this.ClientSize = new System.Drawing.Size(795, 466);
+            this.Controls.Add(this.WaitingProbabilityLabel);
+            this.Controls.Add(this.WaitingProbability);
+            this.Controls.Add(this.MaxQueueTextLabel);
+            this.Controls.Add(this.MaxQueueLength);
+            this.Controls.Add(this.AverageWaitingTimeLabel);
+            this.Controls.Add(this.AverageWaitingTime);
             this.Controls.Add(this.simulateButton);
             this.Controls.Add(this.serverComboBox);
             this.Controls.Add(this.serverServiceTimeDistributionLabel);
@@ -283,6 +343,12 @@
         private System.Windows.Forms.Button simulateButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn serviceTimeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn serverProbabilityColumn;
+        private System.Windows.Forms.TextBox AverageWaitingTime;
+        private System.Windows.Forms.Label AverageWaitingTimeLabel;
+        private System.Windows.Forms.TextBox MaxQueueLength;
+        private System.Windows.Forms.Label MaxQueueTextLabel;
+        private System.Windows.Forms.TextBox WaitingProbability;
+        private System.Windows.Forms.Label WaitingProbabilityLabel;
     }
 }
 
