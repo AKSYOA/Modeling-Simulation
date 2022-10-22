@@ -6,5 +6,5 @@
 - ~~Read the input from testCases files~~ 
 - ~~Read Servers Distributions tables~~
 - ~~Display the input in the GUI~~
-- Display Distributions tables for each server in the GUI
+- ~~Display Distributions tables for each server in the GUI~~
 - ~~Calculate missing Columns in each probability Distribution table ( Cumulative probability - Range )~~

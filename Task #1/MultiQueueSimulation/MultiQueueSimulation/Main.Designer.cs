@@ -41,7 +41,16 @@
             this.interarrivalDistributionDataTable = new System.Windows.Forms.DataGridView();
             this.interarrivalTimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.probabilityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.serviceTimeDistributionDataTable = new System.Windows.Forms.DataGridView();
+            this.serversLabel = new System.Windows.Forms.Label();
+            this.interarrivalDistributionLabel = new System.Windows.Forms.Label();
+            this.serverServiceTimeDistributionLabel = new System.Windows.Forms.Label();
+            this.serverComboBox = new System.Windows.Forms.ComboBox();
+            this.simulateButton = new System.Windows.Forms.Button();
+            this.serviceTimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.serverProbabilityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.interarrivalDistributionDataTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.serviceTimeDistributionDataTable)).BeginInit();
             this.SuspendLayout();
             // 
             // openTestCaseButton
@@ -94,6 +103,7 @@
             // 
             this.numberOfServersTextBox.Location = new System.Drawing.Point(172, 320);
             this.numberOfServersTextBox.Name = "numberOfServersTextBox";
+            this.numberOfServersTextBox.ReadOnly = true;
             this.numberOfServersTextBox.Size = new System.Drawing.Size(92, 20);
             this.numberOfServersTextBox.TabIndex = 5;
             // 
@@ -101,6 +111,7 @@
             // 
             this.stoppingNumberTextBox.Location = new System.Drawing.Point(328, 320);
             this.stoppingNumberTextBox.Name = "stoppingNumberTextBox";
+            this.stoppingNumberTextBox.ReadOnly = true;
             this.stoppingNumberTextBox.Size = new System.Drawing.Size(86, 20);
             this.stoppingNumberTextBox.TabIndex = 6;
             // 
@@ -108,6 +119,7 @@
             // 
             this.stoppingCriteriaTextBox.Location = new System.Drawing.Point(456, 320);
             this.stoppingCriteriaTextBox.Name = "stoppingCriteriaTextBox";
+            this.stoppingCriteriaTextBox.ReadOnly = true;
             this.stoppingCriteriaTextBox.Size = new System.Drawing.Size(107, 20);
             this.stoppingCriteriaTextBox.TabIndex = 7;
             // 
@@ -115,6 +127,7 @@
             // 
             this.selectionMethodTextBox.Location = new System.Drawing.Point(603, 320);
             this.selectionMethodTextBox.Name = "selectionMethodTextBox";
+            this.selectionMethodTextBox.ReadOnly = true;
             this.selectionMethodTextBox.Size = new System.Drawing.Size(92, 20);
             this.selectionMethodTextBox.TabIndex = 8;
             // 
@@ -144,11 +157,88 @@
             this.probabilityColumn.Name = "probabilityColumn";
             this.probabilityColumn.ReadOnly = true;
             // 
+            // serviceTimeDistributionDataTable
+            // 
+            this.serviceTimeDistributionDataTable.AllowUserToAddRows = false;
+            this.serviceTimeDistributionDataTable.AllowUserToDeleteRows = false;
+            this.serviceTimeDistributionDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.serviceTimeDistributionDataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.serviceTimeColumn,
+            this.serverProbabilityColumn});
+            this.serviceTimeDistributionDataTable.Location = new System.Drawing.Point(452, 30);
+            this.serviceTimeDistributionDataTable.Name = "serviceTimeDistributionDataTable";
+            this.serviceTimeDistributionDataTable.ReadOnly = true;
+            this.serviceTimeDistributionDataTable.Size = new System.Drawing.Size(243, 252);
+            this.serviceTimeDistributionDataTable.TabIndex = 10;
+            // 
+            // serversLabel
+            // 
+            this.serversLabel.AutoSize = true;
+            this.serversLabel.Location = new System.Drawing.Point(347, 30);
+            this.serversLabel.Name = "serversLabel";
+            this.serversLabel.Size = new System.Drawing.Size(39, 13);
+            this.serversLabel.TabIndex = 11;
+            this.serversLabel.Text = "Server";
+            // 
+            // interarrivalDistributionLabel
+            // 
+            this.interarrivalDistributionLabel.AutoSize = true;
+            this.interarrivalDistributionLabel.Location = new System.Drawing.Point(121, 9);
+            this.interarrivalDistributionLabel.Name = "interarrivalDistributionLabel";
+            this.interarrivalDistributionLabel.Size = new System.Drawing.Size(118, 13);
+            this.interarrivalDistributionLabel.TabIndex = 12;
+            this.interarrivalDistributionLabel.Text = "Interarrival Distribution";
+            // 
+            // serverServiceTimeDistributionLabel
+            // 
+            this.serverServiceTimeDistributionLabel.AutoSize = true;
+            this.serverServiceTimeDistributionLabel.Location = new System.Drawing.Point(511, 9);
+            this.serverServiceTimeDistributionLabel.Name = "serverServiceTimeDistributionLabel";
+            this.serverServiceTimeDistributionLabel.Size = new System.Drawing.Size(159, 13);
+            this.serverServiceTimeDistributionLabel.TabIndex = 13;
+            this.serverServiceTimeDistributionLabel.Text = "Server Service Time Distribution";
+            // 
+            // serverComboBox
+            // 
+            this.serverComboBox.FormattingEnabled = true;
+            this.serverComboBox.Location = new System.Drawing.Point(319, 46);
+            this.serverComboBox.Name = "serverComboBox";
+            this.serverComboBox.Size = new System.Drawing.Size(121, 21);
+            this.serverComboBox.TabIndex = 14;
+            this.serverComboBox.SelectedIndexChanged += new System.EventHandler(this.serverComboBox_SelectedIndexChanged);
+            // 
+            // simulateButton
+            // 
+            this.simulateButton.Location = new System.Drawing.Point(339, 146);
+            this.simulateButton.Name = "simulateButton";
+            this.simulateButton.Size = new System.Drawing.Size(75, 42);
+            this.simulateButton.TabIndex = 15;
+            this.simulateButton.Text = "Simulate";
+            this.simulateButton.UseVisualStyleBackColor = true;
+            // 
+            // serviceTimeColumn
+            // 
+            this.serviceTimeColumn.HeaderText = "Service Time";
+            this.serviceTimeColumn.Name = "serviceTimeColumn";
+            this.serviceTimeColumn.ReadOnly = true;
+            // 
+            // serverProbabilityColumn
+            // 
+            this.serverProbabilityColumn.HeaderText = "Probability";
+            this.serverProbabilityColumn.Name = "serverProbabilityColumn";
+            this.serverProbabilityColumn.ReadOnly = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(733, 352);
+            this.Controls.Add(this.simulateButton);
+            this.Controls.Add(this.serverComboBox);
+            this.Controls.Add(this.serverServiceTimeDistributionLabel);
+            this.Controls.Add(this.interarrivalDistributionLabel);
+            this.Controls.Add(this.serversLabel);
+            this.Controls.Add(this.serviceTimeDistributionDataTable);
             this.Controls.Add(this.interarrivalDistributionDataTable);
             this.Controls.Add(this.selectionMethodTextBox);
             this.Controls.Add(this.stoppingCriteriaTextBox);
@@ -164,6 +254,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.interarrivalDistributionDataTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.serviceTimeDistributionDataTable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,6 +275,14 @@
         private System.Windows.Forms.DataGridView interarrivalDistributionDataTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn interarrivalTimeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn probabilityColumn;
+        private System.Windows.Forms.DataGridView serviceTimeDistributionDataTable;
+        private System.Windows.Forms.Label serversLabel;
+        private System.Windows.Forms.Label interarrivalDistributionLabel;
+        private System.Windows.Forms.Label serverServiceTimeDistributionLabel;
+        private System.Windows.Forms.ComboBox serverComboBox;
+        private System.Windows.Forms.Button simulateButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn serviceTimeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn serverProbabilityColumn;
     }
 }
 
