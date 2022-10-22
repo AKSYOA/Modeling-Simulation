@@ -97,3 +97,17 @@ D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQu
 D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.exe
 D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.pdb
 D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Main.resources
+D:\semester 7\Modeling & simulation\Task1\Task #1\MultiQueueSimulation\MultiQueueSimulation\bin\Debug\MultiQueueSimulation.exe.config
+D:\semester 7\Modeling & simulation\Task1\Task #1\MultiQueueSimulation\MultiQueueSimulation\bin\Debug\MultiQueueSimulation.exe
+D:\semester 7\Modeling & simulation\Task1\Task #1\MultiQueueSimulation\MultiQueueSimulation\bin\Debug\MultiQueueSimulation.pdb
+D:\semester 7\Modeling & simulation\Task1\Task #1\MultiQueueSimulation\MultiQueueSimulation\bin\Debug\MultiQueueModels.dll
+D:\semester 7\Modeling & simulation\Task1\Task #1\MultiQueueSimulation\MultiQueueSimulation\bin\Debug\MultiQueueModels.pdb
+D:\semester 7\Modeling & simulation\Task1\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csproj.AssemblyReference.cache
+D:\semester 7\Modeling & simulation\Task1\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csproj.SuggestedBindingRedirects.cache
+D:\semester 7\Modeling & simulation\Task1\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Main.resources
+D:\semester 7\Modeling & simulation\Task1\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Properties.Resources.resources
+D:\semester 7\Modeling & simulation\Task1\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csproj.GenerateResource.cache
+D:\semester 7\Modeling & simulation\Task1\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csproj.CoreCompileInputs.cache
+D:\semester 7\Modeling & simulation\Task1\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csproj.CopyComplete
+D:\semester 7\Modeling & simulation\Task1\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.exe
+D:\semester 7\Modeling & simulation\Task1\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.pdb
