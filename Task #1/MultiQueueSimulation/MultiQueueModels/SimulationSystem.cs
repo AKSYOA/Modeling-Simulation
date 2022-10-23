@@ -14,8 +14,9 @@ namespace MultiQueueModels
             this.InterarrivalDistribution = new List<TimeDistribution>();
             this.PerformanceMeasures = new PerformanceMeasures();
             this.SimulationTable = new List<SimulationCase>();
+            this.StoppingCriteria = new Enums.StoppingCriteria();
+            this.SelectionMethod = new Enums.SelectionMethod();
         }
-
         ///////////// INPUTS ///////////// 
         public int NumberOfServers { get; set; }
         public int StoppingNumber { get; set; }
@@ -31,83 +32,144 @@ namespace MultiQueueModels
         //calculating cumulative probability for Interarrival distribution & setting min and max range
         public void calculateCummProbability()
         {
-            for (int i = 0; i < InterarrivalDistribution.Count; i++) {
+            for (int i = 0; i < InterarrivalDistribution.Count; i++)
+            {
 
                 if (i == 0)
                 {
                     InterarrivalDistribution[i].CummProbability = InterarrivalDistribution[i].Probability;
                     InterarrivalDistribution[i].MinRange = 1;
                 }
-                else {
+                else
+                {
                     InterarrivalDistribution[i].CummProbability = InterarrivalDistribution[i - 1].CummProbability + InterarrivalDistribution[i].Probability;
                     InterarrivalDistribution[i].MinRange = InterarrivalDistribution[i - 1].MaxRange + 1;
                 }
                 InterarrivalDistribution[i].MaxRange = Decimal.ToInt32(InterarrivalDistribution[i].CummProbability * 100);
             }
+
+            foreach (var server in Servers)
+            {
+                server.calculateCummProbability();
+            }
         }
 
-        //Setting each simulation case values
+        //testing
+        public void displayTables()
+        {
+            Console.WriteLine("Interarrival Distribution");
+            Console.WriteLine("Time Probability CummProbability minRange MaxRange");
+            foreach (var inter in InterarrivalDistribution)
+            {
+                Console.WriteLine(inter.Time + " " + inter.Probability + " " + inter.CummProbability + " " + inter.MinRange + " " + inter.MaxRange);
+            }
+            Console.WriteLine();
+            foreach (var server in Servers)
+            {
+                Console.WriteLine("server");
+                foreach (var inter in server.TimeDistribution)
+                {
+                    Console.WriteLine(inter.Time + " " + inter.Probability + " " + inter.CummProbability + " " + inter.MinRange + " " + inter.MaxRange);
+
+                }
+            }
+        }
+        //Table creation 
         public void createSimulationTable()
         {
-            for (int i = 0; i < SimulationTable.Count; i++)
+            if (StoppingCriteria == Enums.StoppingCriteria.NumberOfCustomers)
             {
+                createTableUsingCustomersNo();
+            }
+            else
+            {
+                createTableUsingEndTime();
+            }
+        }
+        //Table creation using Customer numbers
+        public void createTableUsingCustomersNo()
+        {
+
+            for (int i = 0; i < StoppingNumber; i++)
+            {
+                SimulationCase s = new SimulationCase();
+
+                s.CustomerNumber = i + 1;
+                s.RandomInterArrival = s.generateRand();
+                s.RandomService = s.generateRand();
+                s.EndTime = s.StartTime + s.ServiceTime;
+                s.InterArrival = calculateInterArrival(s);
+                s.ServiceTime = calculateServiceTime(s);
 
                 if (i == 0)
                 {
-                    SimulationTable[i].ArrivalTime = 0;
-                    SimulationTable[i].StartTime = 0;
+                    s.ArrivalTime = 0;
+                    s.StartTime = 0;
                 }
                 else
                 {
-                    SimulationTable[i].ArrivalTime = SimulationTable[i].InterArrival + SimulationTable[i - 1].ArrivalTime;
-                    SimulationTable[i].StartTime = SimulationTable[i].TimeInQueue + SimulationTable[i].ArrivalTime;
-                }
+                    s.ArrivalTime = s.InterArrival + SimulationTable[i - 1].ArrivalTime;
 
-                SimulationTable[i].CustomerNumber = i + 1;
-                SimulationTable[i].RandomInterArrival = SimulationTable[i].generateRand();
-                SimulationTable[i].RandomService = SimulationTable[i].generateRand();               
-                SimulationTable[i].EndTime = SimulationTable[i].StartTime + SimulationTable[i].ServiceTime;
-                
-                //InterArrival Time
-                for (int j = 0; j < InterarrivalDistribution.Count; j++)
-                {
-
-                    if (SimulationTable[i].RandomInterArrival <= InterarrivalDistribution[j].MaxRange && SimulationTable[i].RandomInterArrival >= InterarrivalDistribution[j].MinRange)
-                    {
-                        SimulationTable[i].ArrivalTime = InterarrivalDistribution[j].Time;
-                    }
                 }
-                //Service Time
-                for (int j = 0; j < SimulationTable[i].AssignedServer.TimeDistribution.Count; j++)
-                {
-
-                    if (SimulationTable[i].RandomService <= SimulationTable[i].AssignedServer.TimeDistribution[j].MaxRange && SimulationTable[i].RandomService >= SimulationTable[i].AssignedServer.TimeDistribution[j].MinRange)
-                    {
-                        SimulationTable[i].ServiceTime = SimulationTable[i].AssignedServer.TimeDistribution[j].Time;
-                    }
-                }
-                //server assignment - لسة متعملتش
+                //server assignment متعملتش
+                SimulationTable.Add(s);
             }
         }
-            //testing
-            public void displayTables()
+        public void createTableUsingEndTime()
+        {
+            int maxTimeReached = 0, index = 0;
+            while (maxTimeReached <= StoppingNumber)
             {
-                Console.WriteLine("Interarrival Distribution");
-                Console.WriteLine("Time Probability CummProbability minRange MaxRange");
-                foreach (var inter in InterarrivalDistribution)
-                {
-                    Console.WriteLine(inter.Time + " " + inter.Probability + " " + inter.CummProbability + " " + inter.MinRange + " " + inter.MaxRange);
-                }
-                Console.WriteLine();
-                foreach (var server in Servers)
-                {
-                    Console.WriteLine("server");
-                    foreach (var inter in server.TimeDistribution)
-                    {
-                        Console.WriteLine(inter.Time + " " + inter.Probability + " " + inter.CummProbability + " " + inter.MinRange + " " + inter.MaxRange);
+                SimulationCase s = new SimulationCase();
 
-                    }
+                s.CustomerNumber = index + 1;
+                s.RandomInterArrival = s.generateRand();
+                s.RandomService = s.generateRand();
+                s.EndTime = s.StartTime + s.ServiceTime;
+                s.InterArrival = calculateInterArrival(s);
+                s.ServiceTime = calculateServiceTime(s);
+
+                if (index == 0)
+                {
+                    s.ArrivalTime = 0;
+                    s.StartTime = 0;
+                }
+                else
+                {
+                    s.ArrivalTime = s.InterArrival + SimulationTable[index - 1].ArrivalTime;
+
+                }
+                //server assignment متعملتش
+                SimulationTable.Add(s);
+                maxTimeReached = s.EndTime;
+                index++;
+            }
+
+        }
+        public int calculateInterArrival(SimulationCase s)
+        {
+
+            for (int i = 0; i < InterarrivalDistribution.Count; i++)
+            {
+                if (s.RandomInterArrival <= InterarrivalDistribution[i].MaxRange && s.RandomInterArrival >= InterarrivalDistribution[i].MinRange)
+                {
+                    return InterarrivalDistribution[i].Time;
+
                 }
             }
+            return 0;
+        }
+        public int calculateServiceTime(SimulationCase s)
+        {
+
+            for (int i = 0; i < s.AssignedServer.TimeDistribution.Count; i++)
+            {
+                if (s.RandomService <= s.AssignedServer.TimeDistribution[i].MaxRange && s.RandomService >= s.AssignedServer.TimeDistribution[i].MinRange)
+                {
+                    return s.AssignedServer.TimeDistribution[i].Time;
+                }
+            }
+            return 0;
+        }
     }
 }
