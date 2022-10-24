@@ -18,6 +18,8 @@ namespace MultiQueueModels
             this.SelectionMethod = new Enums.SelectionMethod();
             this.random = new Random();
             this.totalSimulationTime = 0;
+            this.totalWaitTime = 0;
+            this.totalCustomersWaited = 0;
         }
         ///////////// INPUTS ///////////// 
         public int NumberOfServers { get; set; }
@@ -30,6 +32,8 @@ namespace MultiQueueModels
         private Random random;
 
         private int totalSimulationTime;
+        private int totalWaitTime;
+        private int totalCustomersWaited;
 
 
         ///////////// OUTPUTS /////////////
@@ -118,11 +122,12 @@ namespace MultiQueueModels
                 int assignedServerIndex = assignServer(customerCase.ArrivalTime);
                 customerCase.AssignedServer = Servers[assignedServerIndex];
                 customerCase.StartTime = Math.Max(customerCase.ArrivalTime, customerCase.AssignedServer.FinishTime);
+                customerCase.TimeInQueue = customerCase.StartTime - customerCase.ArrivalTime;
+                totalWaitTime += customerCase.TimeInQueue;
 
                 customerCase.RandomService = random.Next(1, 100);
                 customerCase.ServiceTime = calculateServiceTime(customerCase);
                 customerCase.EndTime = customerCase.StartTime + customerCase.ServiceTime;
-                customerCase.TimeInQueue = customerCase.StartTime - customerCase.ArrivalTime;
                 //Console.WriteLine("Randoms:" +customerCase.RandomInterArrival + " " + customerCase.RandomService);
                 Servers[assignedServerIndex].FinishTime = customerCase.EndTime;
                 Servers[assignedServerIndex].TotalWorkingTime += customerCase.ServiceTime;
@@ -212,6 +217,7 @@ namespace MultiQueueModels
                         index = i;
                     }
                 }
+                totalCustomersWaited++;
                 return index;
             }
 
@@ -227,12 +233,20 @@ namespace MultiQueueModels
                 server.calculateUtilization(totalSimulationTime);
             }
         }
+        public void calculateSystemPerformanceMeasures()
+        {
+            PerformanceMeasures.AverageWaitingTime = (decimal)totalWaitTime / (decimal)StoppingNumber;
+            PerformanceMeasures.WaitingProbability = (decimal)totalCustomersWaited / (decimal)StoppingNumber;
+            PerformanceMeasures.MaxQueueLength = 0;
+
+        }
 
         public void Simulate()
         {
             calculateCummProbability();
             createTableUsingCustomersNo();
             calculateServersPerformanceMeasures();
+            calculateSystemPerformanceMeasures();
 
         }
     }
