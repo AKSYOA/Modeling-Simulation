@@ -53,7 +53,6 @@ namespace MultiQueueModels
                 server.calculateCummProbability();
             }
         }
-
         //testing
         public void displayTables()
         {
@@ -86,7 +85,6 @@ namespace MultiQueueModels
                 createTableUsingEndTime();
             }
         }
-        //Table creation using Customer numbers
         public void createTableUsingCustomersNo()
         {
 
@@ -98,26 +96,26 @@ namespace MultiQueueModels
                 s.RandomInterArrival = s.generateRand();
                 s.RandomService = s.generateRand();
                 s.EndTime = s.StartTime + s.ServiceTime;
-                s.InterArrival = calculateInterArrival(s);
-                s.ServiceTime = calculateServiceTime(s);
+                s.InterArrival = calculateInterArrival(ref s);
+                s.ServiceTime = calculateServiceTime(ref s);
 
                 if (i == 0)
                 {
                     s.ArrivalTime = 0;
-                    s.StartTime = 0;
                 }
                 else
                 {
                     s.ArrivalTime = s.InterArrival + SimulationTable[i - 1].ArrivalTime;
-
                 }
-                //server assignment متعملتش
+                s.AssignedServer = serverAssignment(ref s);
+                s.AssignedServer.FinishTime = s.EndTime;
                 SimulationTable.Add(s);
             }
         }
         public void createTableUsingEndTime()
         {
             int maxTimeReached = 0, index = 0;
+
             while (maxTimeReached <= StoppingNumber)
             {
                 SimulationCase s = new SimulationCase();
@@ -126,27 +124,27 @@ namespace MultiQueueModels
                 s.RandomInterArrival = s.generateRand();
                 s.RandomService = s.generateRand();
                 s.EndTime = s.StartTime + s.ServiceTime;
-                s.InterArrival = calculateInterArrival(s);
-                s.ServiceTime = calculateServiceTime(s);
+                s.InterArrival = calculateInterArrival(ref s);
+                s.ServiceTime = calculateServiceTime(ref s);
 
                 if (index == 0)
                 {
                     s.ArrivalTime = 0;
-                    s.StartTime = 0;
                 }
                 else
                 {
                     s.ArrivalTime = s.InterArrival + SimulationTable[index - 1].ArrivalTime;
 
                 }
-                //server assignment متعملتش
+                s.AssignedServer = serverAssignment(ref s);
+                s.AssignedServer.FinishTime = s.EndTime;
                 SimulationTable.Add(s);
                 maxTimeReached = s.EndTime;
                 index++;
             }
 
         }
-        public int calculateInterArrival(SimulationCase s)
+        public int calculateInterArrival(ref SimulationCase s)
         {
 
             for (int i = 0; i < InterarrivalDistribution.Count; i++)
@@ -159,7 +157,7 @@ namespace MultiQueueModels
             }
             return 0;
         }
-        public int calculateServiceTime(SimulationCase s)
+        public int calculateServiceTime(ref SimulationCase s)
         {
 
             for (int i = 0; i < s.AssignedServer.TimeDistribution.Count; i++)
@@ -170,6 +168,105 @@ namespace MultiQueueModels
                 }
             }
             return 0;
+        }
+        //Assigning a server to a customer
+        public Server serverAssignment(ref SimulationCase s)
+        {
+
+            if (SelectionMethod == Enums.SelectionMethod.HighestPriority)
+            {
+                return assignServerWithPriority(ref s);
+            }
+            else
+            {
+                return assignServerRandomly(ref s);
+            }
+        }
+        public Server assignServerWithPriority(ref SimulationCase s)
+        {
+            //to track the highest prio server that will finish early first
+            int earliestFinishTime = StoppingNumber, serverIndex = Servers.Count;
+
+            for (int i = 0; i < Servers.Count; i++)
+            {
+
+                if (s.ArrivalTime >= Servers[i].FinishTime)
+                {
+                    s.StartTime = Servers[i].FinishTime;
+                    s.TimeInQueue = 0;
+                    return Servers[i];
+                }
+                else
+                {
+                    if (Servers[i].FinishTime < earliestFinishTime && i < serverIndex)
+                    {
+                        earliestFinishTime = Servers[i].FinishTime;
+                        serverIndex = i;
+                    }
+                }
+            }
+            if (s.ArrivalTime >= Servers[serverIndex].FinishTime)
+            {
+                s.TimeInQueue = 0;
+                s.StartTime = s.ArrivalTime;
+            }
+            else {
+                s.TimeInQueue = Servers[serverIndex].FinishTime - s.ArrivalTime;
+                s.StartTime= Servers[serverIndex].FinishTime;
+            }
+            return Servers[serverIndex];
+        }
+        public Server assignServerRandomly(ref SimulationCase s)
+        {
+            List<Server> IdleServers = new List<Server>();
+            int earliestFinishTime = StoppingNumber, serverIndex = Servers.Count;
+            for (int i = 0; i < Servers.Count; i++)
+            {
+
+                if (s.ArrivalTime >= Servers[i].FinishTime)
+                {
+                    IdleServers.Add(Servers[i]);
+                }
+                else
+                {
+                    if (Servers[i].FinishTime < earliestFinishTime)
+                    {
+                        earliestFinishTime = Servers[i].FinishTime;
+                        serverIndex = i;
+                    }
+                }
+            }
+            if (IdleServers.Count == 0)
+            {
+                if (s.ArrivalTime >= Servers[serverIndex].FinishTime)
+                {
+                    s.TimeInQueue = 0;
+                    s.StartTime = s.ArrivalTime;
+                }
+                else
+                {
+                    s.TimeInQueue = Servers[serverIndex].FinishTime - s.ArrivalTime;
+                    s.StartTime= Servers[serverIndex].FinishTime;
+                }
+                return Servers[serverIndex];
+            }
+            else
+            {
+                Random rnd = new Random();
+                int index = rnd.Next(IdleServers.Count);
+
+                if (s.ArrivalTime >= Servers[serverIndex].FinishTime)
+                {
+                    s.TimeInQueue = 0;
+                    s.StartTime = s.ArrivalTime;
+                }
+                else
+                {
+                    s.TimeInQueue = Servers[serverIndex].FinishTime - s.ArrivalTime;
+                    s.StartTime = Servers[serverIndex].FinishTime;
+                }
+                return IdleServers[index];
+            }
         }
     }
 }
