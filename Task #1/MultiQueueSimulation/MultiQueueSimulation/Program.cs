@@ -18,11 +18,7 @@ namespace MultiQueueSimulation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Main form = new Main();
-            Application.Run(form);
-            //SimulationSystem system = new SimulationSystem();
-            //string result = TestingManager.Test(system, form.getFileName());
-            //MessageBox.Show(result);
+            Application.Run(new Main());
         }
     }
 }

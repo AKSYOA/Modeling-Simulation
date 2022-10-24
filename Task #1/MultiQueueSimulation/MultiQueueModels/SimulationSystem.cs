@@ -64,39 +64,7 @@ namespace MultiQueueModels
                 server.calculateCummProbability();
             }
         }
-
-        //testing
-        public void displayTables()
-        {
-            Console.WriteLine("Interarrival Distribution");
-            Console.WriteLine("Time Probability CummProbability minRange MaxRange");
-            foreach (var inter in InterarrivalDistribution)
-            {
-                Console.WriteLine(inter.Time + " " + inter.Probability + " " + inter.CummProbability + " " + inter.MinRange + " " + inter.MaxRange);
-            }
-            Console.WriteLine();
-            foreach (var server in Servers)
-            {
-                Console.WriteLine("server");
-                foreach (var inter in server.TimeDistribution)
-                {
-                    Console.WriteLine(inter.Time + " " + inter.Probability + " " + inter.CummProbability + " " + inter.MinRange + " " + inter.MaxRange);
-
-                }
-            }
-        }
-        //Table creation 
-        public void createSimulationTable()
-        {
-            if (StoppingCriteria == Enums.StoppingCriteria.NumberOfCustomers)
-            {
-                createTableUsingCustomersNo();
-            }
-            else
-            {
-                createTableUsingEndTime();
-            }
-        }
+        
         //Table creation using Customer numbers
         public void createTableUsingCustomersNo()
         {
@@ -128,7 +96,6 @@ namespace MultiQueueModels
                 customerCase.RandomService = random.Next(1, 100);
                 customerCase.ServiceTime = calculateServiceTime(customerCase);
                 customerCase.EndTime = customerCase.StartTime + customerCase.ServiceTime;
-                //Console.WriteLine("Randoms:" +customerCase.RandomInterArrival + " " + customerCase.RandomService);
                 Servers[assignedServerIndex].FinishTime = customerCase.EndTime;
                 Servers[assignedServerIndex].TotalWorkingTime += customerCase.ServiceTime;
                 Servers[assignedServerIndex].numberOfCustomers++;
@@ -138,37 +105,7 @@ namespace MultiQueueModels
             
             }
         }
-        public void createTableUsingEndTime()
-        {
-            int maxTimeReached = 0, index = 0;
-            while (maxTimeReached <= StoppingNumber)
-            {
-                SimulationCase s = new SimulationCase();
 
-                s.CustomerNumber = index + 1;
-                s.RandomInterArrival = random.Next(1, 100);
-                s.RandomService = random.Next(1, 100);
-                s.EndTime = s.StartTime + s.ServiceTime;
-                s.InterArrival = calculateInterArrival(s);
-                s.ServiceTime = calculateServiceTime(s);
-
-                if (index == 0)
-                {
-                    s.ArrivalTime = 0;
-                    s.StartTime = 0;
-                }
-                else
-                {
-                    s.ArrivalTime = s.InterArrival + SimulationTable[index - 1].ArrivalTime;
-
-                }
-                //server assignment متعملتش
-                SimulationTable.Add(s);
-                maxTimeReached = s.EndTime;
-                index++;
-            }
-
-        }
         public int calculateInterArrival(SimulationCase s)
         {
 
@@ -247,7 +184,6 @@ namespace MultiQueueModels
             createTableUsingCustomersNo();
             calculateServersPerformanceMeasures();
             calculateSystemPerformanceMeasures();
-
         }
     }
 }

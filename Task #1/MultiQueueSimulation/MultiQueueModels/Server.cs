@@ -58,9 +58,7 @@ namespace MultiQueueModels
         public void calculateIdleProbability(int totalSimulationTime)
         {
             int totalIdleTime = totalSimulationTime - TotalWorkingTime;
-            Console.WriteLine(totalIdleTime + " "  + totalSimulationTime + " " + TotalWorkingTime);
             IdleProbability = (decimal)totalIdleTime / (decimal)totalSimulationTime;
-            Console.WriteLine(IdleProbability);
         }
 
         public void calculateUtilization(int totalSimulationTime)
