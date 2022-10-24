@@ -23,6 +23,15 @@ namespace MultiQueueSimulation
         private void Output_Load(object sender, EventArgs e)
         {
             populateDataView();
+            loadComboBoxData();
+        }
+        public void loadComboBoxData()
+        {
+            serverComboBox.Items.Clear();
+            for (int i = 1; i <= system.NumberOfServers; i++)
+            {
+                serverComboBox.Items.Add(i);
+            }
         }
 
         private void populateDataView()
@@ -43,11 +52,18 @@ namespace MultiQueueSimulation
                     serviceRandom, serviceBegin, serviceTime, serviceEnd, serverIndex, timeInQueue);
 
             }
+            averageWaitingTextBox.Text = system.PerformanceMeasures.AverageWaitingTime.ToString();
+            probabilityOfWaitTextBox.Text = system.PerformanceMeasures.WaitingProbability.ToString();
+            maxQueueLengthTextBox.Text = system.PerformanceMeasures.MaxQueueLength.ToString();
         }
 
-        private void outputDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void serverComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            int index = serverComboBox.SelectedIndex;
+            idleProbabilityTextBox.Text = system.Servers[index].IdleProbability.ToString();
+            avgServiceTimeTextBox.Text = system.Servers[index].AverageServiceTime.ToString();
+            utilizationTextBox.Text = system.Servers[index].Utilization.ToString();
+            
         }
     }
 }
