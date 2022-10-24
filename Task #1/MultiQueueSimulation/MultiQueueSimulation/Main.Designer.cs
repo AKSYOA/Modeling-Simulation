@@ -63,6 +63,11 @@
             this.openTestCaseButton.UseVisualStyleBackColor = true;
             this.openTestCaseButton.Click += new System.EventHandler(this.openTestCaseButton_Click);
             // 
+            // testCaseFileDialog
+            // 
+            this.testCaseFileDialog.ReadOnlyChecked = true;
+            this.testCaseFileDialog.ShowReadOnly = true;
+            // 
             // numberOfServersLabel
             // 
             this.numberOfServersLabel.AutoSize = true;
