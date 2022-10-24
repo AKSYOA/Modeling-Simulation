@@ -21,11 +21,11 @@ namespace MultiQueueSimulation
         public Main()
         {
             InitializeComponent();
+            fileHandler = new FileHandler();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            fileHandler = new FileHandler();
         }
 
         public string getFileName()
@@ -113,6 +113,8 @@ namespace MultiQueueSimulation
         private void simulateButton_Click(object sender, EventArgs e)
         {
             system.Simulate();
+            Output output = new Output(system);
+            output.Show();
             string result = TestingManager.Test(system, fileName);
             MessageBox.Show(result);
         }
