@@ -8,7 +8,11 @@
 - ~~Display the input in the GUI~~
 - ~~Display Distributions tables for each server in the GUI~~
 - ~~Calculate missing Columns in each probability Distribution table ( Cumulative probability - Range )~~
-- Generate Simulation Table
+- Generate Simulation Table Using Selection Method:
+    - ~~Highest Priority~~
+    - Random
+    - [Bonus] Least Utilization
 - Display Simulation Table in The GUI
-- Calculate PerformanceMeasures
+- ~~Calculate Performance Measures for each server~~
+- Calculate System Performance Measures [AverageWaitingTime - MaxQueueLength - WaitingProbability]
 - Generate and Display -Busy Time- Chart for each server
