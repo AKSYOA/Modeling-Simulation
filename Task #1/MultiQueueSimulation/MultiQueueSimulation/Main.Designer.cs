@@ -42,13 +42,13 @@
             this.interarrivalTimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.probabilityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.serviceTimeDistributionDataTable = new System.Windows.Forms.DataGridView();
+            this.serviceTimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.serverProbabilityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.serversLabel = new System.Windows.Forms.Label();
             this.interarrivalDistributionLabel = new System.Windows.Forms.Label();
             this.serverServiceTimeDistributionLabel = new System.Windows.Forms.Label();
             this.serverComboBox = new System.Windows.Forms.ComboBox();
             this.simulateButton = new System.Windows.Forms.Button();
-            this.serviceTimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.serverProbabilityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.interarrivalDistributionDataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.serviceTimeDistributionDataTable)).BeginInit();
             this.SuspendLayout();
@@ -171,6 +171,18 @@
             this.serviceTimeDistributionDataTable.Size = new System.Drawing.Size(243, 252);
             this.serviceTimeDistributionDataTable.TabIndex = 10;
             // 
+            // serviceTimeColumn
+            // 
+            this.serviceTimeColumn.HeaderText = "Service Time";
+            this.serviceTimeColumn.Name = "serviceTimeColumn";
+            this.serviceTimeColumn.ReadOnly = true;
+            // 
+            // serverProbabilityColumn
+            // 
+            this.serverProbabilityColumn.HeaderText = "Probability";
+            this.serverProbabilityColumn.Name = "serverProbabilityColumn";
+            this.serverProbabilityColumn.ReadOnly = true;
+            // 
             // serversLabel
             // 
             this.serversLabel.AutoSize = true;
@@ -215,18 +227,7 @@
             this.simulateButton.TabIndex = 15;
             this.simulateButton.Text = "Simulate";
             this.simulateButton.UseVisualStyleBackColor = true;
-            // 
-            // serviceTimeColumn
-            // 
-            this.serviceTimeColumn.HeaderText = "Service Time";
-            this.serviceTimeColumn.Name = "serviceTimeColumn";
-            this.serviceTimeColumn.ReadOnly = true;
-            // 
-            // serverProbabilityColumn
-            // 
-            this.serverProbabilityColumn.HeaderText = "Probability";
-            this.serverProbabilityColumn.Name = "serverProbabilityColumn";
-            this.serverProbabilityColumn.ReadOnly = true;
+            this.simulateButton.Click += new System.EventHandler(this.simulateButton_Click);
             // 
             // Main
             // 

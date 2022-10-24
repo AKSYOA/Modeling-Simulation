@@ -11,6 +11,12 @@ namespace MultiQueueModels
         public Server()
         {
             this.TimeDistribution = new List<TimeDistribution>();
+            this.IdleProbability = 0;
+            this.AverageServiceTime = 0;
+            this.Utilization = 0;
+            this.FinishTime = 0;
+            this.TotalWorkingTime = 0;
+            this.numberOfCustomers = 0;
         }
 
         public int ID { get; set; }
@@ -23,7 +29,7 @@ namespace MultiQueueModels
         //optional if needed use them
         public int FinishTime { get; set; }
         public int TotalWorkingTime { get; set; }
-
+        public int numberOfCustomers { get; set; }
         public void calculateCummProbability()
         {
             for (int i = 0; i < TimeDistribution.Count; i++)
@@ -41,6 +47,25 @@ namespace MultiQueueModels
                 }
                 TimeDistribution[i].MaxRange = Decimal.ToInt32(TimeDistribution[i].CummProbability * 100);
             }
+        }
+
+        public void calculateAverageServiceTime()
+        {
+            if(numberOfCustomers!=0)
+            AverageServiceTime = (decimal)TotalWorkingTime / (decimal)numberOfCustomers;
+        }
+
+        public void calculateIdleProbability(int totalSimulationTime)
+        {
+            int totalIdleTime = totalSimulationTime - TotalWorkingTime;
+            Console.WriteLine(totalIdleTime + " "  + totalSimulationTime + " " + TotalWorkingTime);
+            IdleProbability = (decimal)totalIdleTime / (decimal)totalSimulationTime;
+            Console.WriteLine(IdleProbability);
+        }
+
+        public void calculateUtilization(int totalSimulationTime)
+        {
+            Utilization = (decimal)TotalWorkingTime / (decimal)totalSimulationTime;
         }
     }
 }

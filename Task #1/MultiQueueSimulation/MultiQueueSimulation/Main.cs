@@ -109,5 +109,12 @@ namespace MultiQueueSimulation
             }
             
         }
+
+        private void simulateButton_Click(object sender, EventArgs e)
+        {
+            system.Simulate();
+            string result = TestingManager.Test(system, fileName);
+            MessageBox.Show(result);
+        }
     }
 }
