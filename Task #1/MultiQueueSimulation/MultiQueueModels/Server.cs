@@ -61,9 +61,12 @@ namespace MultiQueueModels
             IdleProbability = (decimal)totalIdleTime / (decimal)totalSimulationTime;
         }
 
-        public void calculateUtilization(int totalSimulationTime)
+        public decimal calculateUtilization(int totalSimulationTime)
         {
-            Utilization = (decimal)TotalWorkingTime / (decimal)totalSimulationTime;
+            if (totalSimulationTime != 0)
+                return Utilization = (decimal)TotalWorkingTime / (decimal)totalSimulationTime;
+            else
+                return 0;
         }
     }
 }

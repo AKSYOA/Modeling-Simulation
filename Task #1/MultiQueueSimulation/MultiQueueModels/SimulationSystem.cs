@@ -157,8 +157,84 @@ namespace MultiQueueModels
                 totalCustomersWaited++;
                 return index;
             }
+            else if (SelectionMethod.Equals(Enums.SelectionMethod.Random))
+            {
+                List<int> idleServers = new List<int>();
+                for (int i = 0; i < Servers.Count; i++)
+                {
+                    if (arrivalTime >= Servers[i].FinishTime)
+                        idleServers.Add(i);
+                }
 
-            return 0;
+                if (idleServers.Count > 0) // there is avaliable servers
+                {
+                    int idleServerIndex = random.Next(0, idleServers.Count);
+                    Console.WriteLine(idleServerIndex);
+                    Console.WriteLine(idleServers[idleServerIndex]);
+                    return idleServers[idleServerIndex];
+                }else
+                {
+                    int index = -1, earliestFinishTime = 99999999;
+                    for (int i = 0; i < Servers.Count; i++)
+                    {
+                        if (earliestFinishTime > Servers[i].FinishTime)
+                        {
+                            earliestFinishTime = Servers[i].FinishTime;
+                            index = i;
+                        }
+                    }
+                    totalCustomersWaited++;
+                    return index;
+                }
+            }
+            else
+            {
+                decimal leastUtilization = 2;
+                int index = -1;
+                for (int i = 0; i < Servers.Count; i++)
+                {
+                    if (arrivalTime >= Servers[i].FinishTime)
+                    {
+                        decimal utilization = Servers[i].calculateUtilization(arrivalTime);
+                        if (utilization < leastUtilization)
+                        {
+                            leastUtilization = utilization;
+                            index = i;
+                        }
+                    }
+                }
+              
+                if (index != -1)
+                {
+                    return index;
+                }else
+                {
+                    int earliestFinishTime = 99999999;
+                    for (int i = 0; i < Servers.Count; i++)
+                    {
+                        if (earliestFinishTime > Servers[i].FinishTime)
+                        {
+                            earliestFinishTime = Servers[i].FinishTime;
+                        }
+                    }
+                    index = -1; leastUtilization = 2;
+                    for (int i = 0; i < Servers.Count; i++)
+                    {
+                        if (Servers[i].FinishTime == earliestFinishTime)
+                        {
+                            decimal utilization = Servers[i].calculateUtilization(earliestFinishTime);
+                            if (utilization < leastUtilization)
+                            {
+                                leastUtilization = utilization;
+                                index = i;
+                            }
+                        }
+                    }
+                    totalCustomersWaited++;
+                    return index;
+                }
+
+            }
         }
 
         public void calculateServersPerformanceMeasures()
