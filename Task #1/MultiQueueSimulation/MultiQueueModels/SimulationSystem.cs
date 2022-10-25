@@ -237,6 +237,34 @@ namespace MultiQueueModels
             }
         }
 
+        public int calculateMaximumQueueLength()
+        {
+            //:: TODO
+            if (totalCustomersWaited == 0)
+            {
+                return 0;
+            }else
+            {
+                int maximumQueueLength = 0;
+
+                for (int i = 0; i < SimulationTable.Count; i++)
+                {
+                    int count = 0;
+                    for (int j = i; j < SimulationTable.Count; j++)
+                    {
+                        if (SimulationTable[i].StartTime > SimulationTable[j].ArrivalTime)
+                        {
+                            count++;
+                        }
+
+                    }
+                    if (count > maximumQueueLength) maximumQueueLength = count;
+
+                }
+                return maximumQueueLength;
+            }
+        }
+
         public void calculateServersPerformanceMeasures()
         {
             foreach(var server in Servers)
@@ -250,7 +278,7 @@ namespace MultiQueueModels
         {
             PerformanceMeasures.AverageWaitingTime = (decimal)totalWaitTime / (decimal)StoppingNumber;
             PerformanceMeasures.WaitingProbability = (decimal)totalCustomersWaited / (decimal)StoppingNumber;
-            PerformanceMeasures.MaxQueueLength = 0;
+            PerformanceMeasures.MaxQueueLength = calculateMaximumQueueLength();
 
         }
 
