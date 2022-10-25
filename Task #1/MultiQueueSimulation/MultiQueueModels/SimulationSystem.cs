@@ -100,6 +100,8 @@ namespace MultiQueueModels
                 Servers[assignedServerIndex].TotalWorkingTime += customerCase.ServiceTime;
                 Servers[assignedServerIndex].numberOfCustomers++;
 
+                Servers[assignedServerIndex].Intervals.Add(new KeyValuePair<int,int>(customerCase.StartTime, customerCase.EndTime));
+
                 totalSimulationTime = Math.Max(totalSimulationTime, customerCase.EndTime);
                 SimulationTable.Add(customerCase);
             
@@ -269,6 +271,7 @@ namespace MultiQueueModels
         {
             foreach(var server in Servers)
             {
+                server.displayIntervals();
                 server.calculateAverageServiceTime();
                 server.calculateIdleProbability(totalSimulationTime);
                 server.calculateUtilization(totalSimulationTime);

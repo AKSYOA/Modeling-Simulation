@@ -17,6 +17,7 @@ namespace MultiQueueModels
             this.FinishTime = 0;
             this.TotalWorkingTime = 0;
             this.numberOfCustomers = 0;
+            this.Intervals = new List<KeyValuePair<int, int>>();
         }
 
         public int ID { get; set; }
@@ -25,6 +26,8 @@ namespace MultiQueueModels
         public decimal Utilization { get; set; }
 
         public List<TimeDistribution> TimeDistribution;
+
+        public List<KeyValuePair<int, int>> Intervals;
 
         //optional if needed use them
         public int FinishTime { get; set; }
@@ -67,6 +70,18 @@ namespace MultiQueueModels
                 return Utilization = (decimal)TotalWorkingTime / (decimal)totalSimulationTime;
             else
                 return 0;
+        }
+
+        //testing
+        public void displayIntervals()
+        {
+            Console.WriteLine("Server:" + ID);
+            
+            for (int i =0; i < Intervals.Count; i++)
+            {
+                Console.WriteLine(Intervals[i].Key + " " + Intervals[i].Value);
+            }
+            Console.WriteLine();
         }
     }
 }
