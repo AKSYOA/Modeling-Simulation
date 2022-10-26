@@ -292,5 +292,11 @@ namespace MultiQueueModels
             calculateServersPerformanceMeasures();
             calculateSystemPerformanceMeasures();
         }
+
+
+        public int getSimulationTime()
+        {
+            return totalSimulationTime;
+        }
     }
 }

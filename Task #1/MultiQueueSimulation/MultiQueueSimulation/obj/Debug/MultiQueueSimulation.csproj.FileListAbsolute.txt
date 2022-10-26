@@ -112,3 +112,4 @@ D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQu
 D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.exe
 D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.pdb
 D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Output.resources
+D:\FCIS\4thyear\Modeling & Simulation\Tasks\Task #1\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Graph.resources

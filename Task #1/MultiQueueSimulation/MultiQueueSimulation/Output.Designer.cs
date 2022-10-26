@@ -55,6 +55,7 @@
             this.utilizationTextBox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.serverComboBox = new System.Windows.Forms.ComboBox();
+            this.busyTimeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.outputDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -282,11 +283,22 @@
             this.serverComboBox.TabIndex = 16;
             this.serverComboBox.SelectedIndexChanged += new System.EventHandler(this.serverComboBox_SelectedIndexChanged);
             // 
+            // busyTimeButton
+            // 
+            this.busyTimeButton.Location = new System.Drawing.Point(868, 418);
+            this.busyTimeButton.Name = "busyTimeButton";
+            this.busyTimeButton.Size = new System.Drawing.Size(96, 38);
+            this.busyTimeButton.TabIndex = 17;
+            this.busyTimeButton.Text = "Busy Time Graph";
+            this.busyTimeButton.UseVisualStyleBackColor = true;
+            this.busyTimeButton.Click += new System.EventHandler(this.busyTimeButton_Click);
+            // 
             // Output
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1043, 474);
+            this.Controls.Add(this.busyTimeButton);
             this.Controls.Add(this.serverComboBox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.utilizationTextBox);
@@ -342,5 +354,6 @@
         private System.Windows.Forms.TextBox utilizationTextBox;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox serverComboBox;
+        private System.Windows.Forms.Button busyTimeButton;
     }
 }

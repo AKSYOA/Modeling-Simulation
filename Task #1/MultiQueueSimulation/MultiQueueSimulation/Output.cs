@@ -65,5 +65,14 @@ namespace MultiQueueSimulation
             utilizationTextBox.Text = system.Servers[index].Utilization.ToString();
             
         }
+
+        private void busyTimeButton_Click(object sender, EventArgs e)
+        {
+            int index = serverComboBox.SelectedIndex;
+            List<KeyValuePair<int, int>> Intervals = system.Servers[index].Intervals;
+            int simulationTime = system.getSimulationTime();
+            Graph serverGraph = new Graph(index, Intervals, simulationTime);
+            serverGraph.Show();
+        }
     }
 }
