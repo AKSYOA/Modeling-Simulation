@@ -18,4 +18,4 @@
 - ~~Display Performance Measures in the GUI~~
 - ~~Calculate Busy Time intervals for each server~~
 - ~~Display -Busy Time- Chart for each server in the GUI~~
-- Fix Bugs in Random Selection Method
+- ~~Fix Bugs in Random Selection Method~~

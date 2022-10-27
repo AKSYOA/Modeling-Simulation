@@ -40,6 +40,11 @@ namespace MultiQueueModels
         public List<SimulationCase> SimulationTable { get; set; }
         public PerformanceMeasures PerformanceMeasures { get; set; }
 
+        public int getSimulationTime()
+        {
+            return totalSimulationTime;
+        }
+
         //calculating cumulative probability for Interarrival distribution & setting min and max range
         public void calculateCummProbability()
         {
@@ -108,28 +113,25 @@ namespace MultiQueueModels
             }
         }
 
-        public int calculateInterArrival(SimulationCase s)
+        public int calculateInterArrival(SimulationCase customerCase)
         {
 
             for (int i = 0; i < InterarrivalDistribution.Count; i++)
             {
-                if (s.RandomInterArrival <= InterarrivalDistribution[i].MaxRange && s.RandomInterArrival >= InterarrivalDistribution[i].MinRange)
-                {
+                if (customerCase.RandomInterArrival <= InterarrivalDistribution[i].MaxRange &&
+                    customerCase.RandomInterArrival >= InterarrivalDistribution[i].MinRange)
                     return InterarrivalDistribution[i].Time;
-
-                }
             }
             return 0;
         }
-        public int calculateServiceTime(SimulationCase s)
+        public int calculateServiceTime(SimulationCase customerCase)
         {
 
-            for (int i = 0; i < s.AssignedServer.TimeDistribution.Count; i++)
+            for (int i = 0; i < customerCase.AssignedServer.TimeDistribution.Count; i++)
             {
-                if (s.RandomService <= s.AssignedServer.TimeDistribution[i].MaxRange && s.RandomService >= s.AssignedServer.TimeDistribution[i].MinRange)
-                {
-                    return s.AssignedServer.TimeDistribution[i].Time;
-                }
+                if (customerCase.RandomService <= customerCase.AssignedServer.TimeDistribution[i].MaxRange &&
+                    customerCase.RandomService >= customerCase.AssignedServer.TimeDistribution[i].MinRange)
+                    return customerCase.AssignedServer.TimeDistribution[i].Time;
             }
             return 0;
         }
@@ -162,31 +164,31 @@ namespace MultiQueueModels
             else if (SelectionMethod.Equals(Enums.SelectionMethod.Random))
             {
                 List<int> idleServers = new List<int>();
+                int earliestFinishTime = 99999999;
                 for (int i = 0; i < Servers.Count; i++)
                 {
+                    earliestFinishTime = Math.Min(earliestFinishTime, Servers[i].FinishTime);
                     if (arrivalTime >= Servers[i].FinishTime)
                         idleServers.Add(i);
                 }
 
                 if (idleServers.Count > 0) // there is avaliable servers
                 {
-                    int idleServerIndex = random.Next(0, idleServers.Count);
-                    Console.WriteLine(idleServerIndex);
-                    Console.WriteLine(idleServers[idleServerIndex]);
+                    int idleServerIndex = random.Next(0, idleServers.Count - 1);
                     return idleServers[idleServerIndex];
                 }else
                 {
-                    int index = -1, earliestFinishTime = 99999999;
                     for (int i = 0; i < Servers.Count; i++)
                     {
-                        if (earliestFinishTime > Servers[i].FinishTime)
+                        if (Servers[i].FinishTime == earliestFinishTime)
                         {
-                            earliestFinishTime = Servers[i].FinishTime;
-                            index = i;
+                            idleServers.Add(i);
                         }
                     }
+
                     totalCustomersWaited++;
-                    return index;
+                    int idleServerIndex = random.Next(0, idleServers.Count - 1);
+                    return idleServers[idleServerIndex];
                 }
             }
             else
@@ -303,9 +305,5 @@ namespace MultiQueueModels
         }
 
 
-        public int getSimulationTime()
-        {
-            return totalSimulationTime;
-        }
     }
 }
