@@ -277,6 +277,14 @@ namespace MultiQueueModels
                 server.calculateUtilization(totalSimulationTime);
             }
         }
+
+        public void clearSimulation()
+        {
+            foreach(var customerCase in SimulationTable)
+            {
+                customerCase.AssignedServer.FinishTime = 0;
+            }
+        }
         public void calculateSystemPerformanceMeasures()
         {
             PerformanceMeasures.AverageWaitingTime = (decimal)totalWaitTime / (decimal)StoppingNumber;
@@ -291,6 +299,7 @@ namespace MultiQueueModels
             createTableUsingCustomersNo();
             calculateServersPerformanceMeasures();
             calculateSystemPerformanceMeasures();
+            clearSimulation();
         }
 
 
