@@ -112,11 +112,19 @@ namespace MultiQueueSimulation
 
         private void simulateButton_Click(object sender, EventArgs e)
         {
-            system.Simulate();
-            Output output = new Output(system);
-            output.Show();
-            string result = TestingManager.Test(system, fileName);
-            MessageBox.Show(result);
+            if (system != null)
+            {
+                system.Simulate();
+                Output output = new Output(system);
+                output.Show();
+                string result = TestingManager.Test(system, fileName);
+                MessageBox.Show(result);
+            }
+            else
+                MessageBox.Show("Please Choose Test Case");
+
+            
+            
         }
     }
 }
