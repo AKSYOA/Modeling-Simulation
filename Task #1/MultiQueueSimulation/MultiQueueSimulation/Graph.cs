@@ -33,7 +33,11 @@ namespace MultiQueueSimulation
             serverChart.ChartAreas[0].AxisX.Minimum = 0;
             serverChart.ChartAreas[0].AxisX.Title = "Time";
             serverChart.ChartAreas[0].AxisY.Title = "Idle / Busy";
-            serverChart.ChartAreas[0].AxisX.Interval = 1;
+            if (simulationTime > 100)
+                serverChart.ChartAreas[0].AxisX.Interval = 10;
+            else
+                serverChart.ChartAreas[0].AxisX.Interval = 1;
+            
             serverChart.Series[0]["PointWidth"] = "1";
 
             for (int i =0; i < Intervals.Count; i++)
